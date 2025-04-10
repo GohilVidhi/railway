@@ -1,0 +1,25 @@
+{% extends "home.html" %}
+{% load static %}
+{% block content %} 
+    
+  
+    
+    <div class="card1">
+        {%  for i in pid %}
+        <div class="one-card">
+            <form action="{% url 'men' %}" method="post">
+            <i class="fa-solid fa-heart icon"></i>
+            <div class="img1">
+                <img src="{% static 'sp/mm1.webp' %}" alt="">
+            </div>
+            <div class="description">
+                <p> <a href="#">{{i.name}}</a></p>
+                <h3>{{i.price}}</h3>
+                <button>Add to cart</button>
+            </div>
+        </form>
+        </div>
+        {% endfor  %}
+    </div>
+
+{% endblock %}

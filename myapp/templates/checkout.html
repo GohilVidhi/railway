@@ -1,0 +1,434 @@
+{% extends "home.html" %}
+{% load static %}
+{% block content %}
+
+   
+<style>
+    .razorpay-payment-button {
+        display: none; /* Hides the default Razorpay button */
+    }
+</style>
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                  
+                  
+                  
+                    {% comment %} <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
+                    <form action="{% url 'checkout' %}" method="post">
+                        {% csrf_token %}
+                    <div class="row">
+                        
+                        <div class="col-md-6 form-group">
+                            <label>First Name</label>
+                            <input class="form-control" type="text"  name="fn" >
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Last Name</label>
+                            <input class="form-control" type="text" name="ln">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>E-mail</label>
+                            <input class="form-control" type="text"  name="email">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Mobile No</label>
+                            <input class="form-control" type="text"  name="mn">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Address Line 1</label>
+                            <input class="form-control" type="text" name="addressline1">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Address Line 2</label>
+                            <input class="form-control" type="text"  name="addressline2">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Country</label>
+                            <input class="form-control" type="text"  name="country">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>City</label>
+                            <input class="form-control" type="text" name="city">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>State</label>
+                            <input class="form-control" type="text" name="state">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>ZIP Code</label>
+                            <input class="form-control" type="text" name="pincode">
+                            
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <input type="submit" value="Edit" style="width: 70px; height: 30px;">               
+                        <input type="submit" style="width: 100px; margin-top: 50px;" >
+                            
+                        </div>
+                           
+                    
+                    </div>
+                   
+                </form> {% endcomment %}
+
+
+
+                <h2 class="h3 mb-3 text-black">Billing Details</h2>
+				<div class="p-3 p-lg-5 border bg-white">
+                    <form id="checkout-form" method="POST">
+                        {% csrf_token %}
+                        
+                        <table border="2" width="100%" style="border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Address</th>
+                                    <th>State</th>
+                                    <th>Pincode</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for add in existing_address %}
+                                <tr>
+                                    <td>
+                                        <input type="radio" name="selected_address" value="{{ add.id }}" 
+       onclick="updateShippingCharge(this.value); updateAddress(this.value);">
+                                    </td>
+                                    <td>{{ add.resident_address }}</td>
+                                    <td>{{ add.state }}</td>
+                                    <td>{{ add.pincode }}</td>
+                                    <td>
+                                        <a href="{% url 'checkout' %}?edit={{ add.id }}">Edit</a> | 
+                                        <a href="{% url 'editaddress' %}?id={{ add.id }}">Delete</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                        <!-- Hidden Input for Selected Address -->
+                        <input type="hidden" name="address_id" id="address_id">
+                    </form>
+
+
+				  <!-- Button to open the new address form -->
+				  <button id="addNewAddressBtn" class="btn btn-success" onclick="openNewAddressForm()">Add New Address</button>
+			  
+				  <!-- New Address Form (Initially Hidden) -->
+				   <br><br>
+				   {% comment %} <div id="newAddressForm" style="display: {% if existing %}block{% else %}none{% endif %};"> {% endcomment %}
+
+				   {% comment %} <div id="newAddressForm" style="display:none;"> {% endcomment %}
+
+				
+				
+				   <div id="newAddressForm" style="display: {% if existing %}block{% else %}none{% endif %};">
+					<form method="POST"  {% if existing %}  action="{% url 'editaddress' %}" {% else %} action="{% url 'checkout' %}"  {% endif %}  > <input type="Hidden" name="aid" value="{% if existing %}{{ existing.id }}{% endif %}">
+						{% csrf_token %}
+						
+			
+					<h4 class="text-black">New Address</h4>
+					<div class="form-group row">
+					  <div class="col-md-6">
+						<label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="fname" name="fname" value="{% if existing %}{{ existing.firstname }}{% endif %}">
+					  </div>
+					  <div class="col-md-6">
+						<label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="lname" name="lname"  value="{% if existing %}{{ existing.lastname }}{% endif %}" >
+					  </div>
+					</div>
+			  
+					<div class="form-group row">
+					  <div class="col-md-12">
+						<label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="address" name="address" placeholder="Street address"  value="{% if existing %}{{ existing.resident_address }}{% endif %}">
+			
+					</div>
+					</div>
+			  
+			  
+					<div class="form-group row">
+						<div class="col-md-12">
+						
+						  <label for="fruit">Choose a City:</label>
+						  <select id="fruit" name="city">
+							{%for add in ship %}  
+                            <option value="{{add.shiping_city}}">{{add.shiping_city}}</option>
+							  {%endfor%}
+						  </select>
+					  </div>
+					  </div>
+
+
+					<div class="form-group row">
+					  <div class="col-md-6">
+						<label for="c_state_country" class="text-black">State <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="c_state_country" name="state" value="{% if existing %}{{ existing.state }}{% endif %}"  >
+					  </div>
+					  <div class="col-md-6">
+						<label for="c_postal_zip" class="text-black">Pin-Code <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="c_postal_zip" name="pincode" value="{% if existing %}{{ existing.pincode }}{% endif %}" >
+					  </div>
+					</div>
+			  
+					<div class="form-group row mb-5">
+					  <div class="col-md-6">
+						<label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="c_email_address" name="mail" readonly value="{{uid.email}}}">
+					  </div>
+					  <div class="col-md-6">
+						<label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="c_phone" name="phone" placeholder="Phone Number"  value="{% if existing %}{{ existing.phone }}{% endif %}" >
+					  </div>
+					</div>
+					
+					<button type="submit" class="btn btn-primary"> {% if existing %}Save Edit{% else %}Register{% endif %}</button>
+				</form>
+
+
+
+
+						
+            </div>
+				</div>
+			  
+
+
+                <script>
+                    // Function to open the new address form
+                    function openNewAddressForm() {
+                      // Show the new address form
+                      document.getElementById("newAddressForm").style.display = "block";
+                    }
+                  </script>
+                  
+      
+                </div>
+                  
+                {% comment %} <table >
+                    <tr style="border: 2px black;">
+                        <th >Firstname</th>
+                        <th>Email</th>
+                        <th>Address Line 1</th>
+                        <th>Address Line 2</th>
+                        <th>Pincode</th>
+                    
+                    </tr>
+                    {% for i in ch %}
+                    <tr >
+                        <th>{{i.fn}}</th>
+                        <th>{{i.email}}</th>
+                        <th>{{i.addressline1}}</th>
+                        <th>{{i.addressline2}}</th>
+                        <th>{{i.pincode}}</th>
+                        
+                    </tr>
+                    {% endfor %}
+                </table> {% endcomment %}
+
+
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0" style="background-color:#D19C97 !important;">
+                        <h4 class="font-weight-semi-bold m-0" >Order Total</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="font-weight-medium mb-3">Products</h5>
+                      {%for pro in cart_sum%}
+                        <div class="d-flex justify-content-between">
+                            <p> {{pro.name}} <strong class="mx-2">x</strong> {{ pro.quantity}} </p>
+                            
+                            <p>Rs.{{pro.price}}</p>
+                        </div>
+                        {%endfor%}
+
+                        <hr class="mt-0">
+                        <div class="d-flex justify-content-between mb-3 pt-1">
+                            <h6 class="font-weight-medium">Subtotal</h6>
+                            <h6 class="font-weight-medium">Rs.{{subtotal}}</h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium" id="shipping_charge">Rs.0</h6>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Coupon</h6>
+                            <h6 class="font-weight-medium">{{disamount}}  [{{dis}}%]</h6>
+
+                        </div>
+                    </div>
+                    
+                    
+                    
+
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="font-weight-bold">Total</h5>
+                            <h5 class="font-weight-bold">Rs.{{total_price}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0" style="background-color:#D19C97 !important;">
+                        <h4 class="font-weight-semi-bold m-0">Payment</h4>
+                    </div>
+                    
+                    <form id="payment-form" method="POST" action="{% url 'order_create' %}">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input payment-option" name="payment" id="paypal" value="paypal">
+                                    <label class="custom-control-label" for="paypal">Paypal</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input payment-option" name="payment" id="directcheck" value="directcheck">
+                                    <label class="custom-control-label" for="directcheck">Direct Check</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input payment-option" name="payment" id="banktransfer" value="banktransfer">
+                                    <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input payment-option" name="payment" id="cod" value="cod">
+                                    <label class="custom-control-label" for="cod">Cash on Delivery</label>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <input type="hidden" name="selected_address" id="other_address_id" >
+                    
+                        <div class="card-footer border-secondary bg-transparent">
+                            <button id="cod-button" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" style="background-color:#D19C97 !important; display: none;">
+                                Place COD Order
+                            </button>
+                    
+                            <button id="rzp-button1" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" style="background-color:#D19C97 !important; display: none;">
+                                Pay with Razorpay
+                            </button>
+                        </div>
+                    </form>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateShippingCharge(address_id) {
+         console.log("Selected Address ID:", address_id); // Debugging log
+ 
+         fetch(`/get_shipping_charge/${address_id}/`)
+         .then(response => response.json())
+         .then(data => {
+             console.log("Received Data:", data); // Debugging log
+             let chargeElement = document.getElementById('shipping_charge');
+             if (chargeElement) {
+                 chargeElement.textContent = "Rs." + data.shipping_charge;
+             }
+         })
+         .catch(error => console.error('Error fetching shipping charge:', error));
+     }
+     </script>    
+     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const paymentOptions = document.querySelectorAll(".payment-option");
+            const codButton = document.getElementById("cod-button");
+            const razorpayButton = document.getElementById("rzp-button1");
+            const addressField = document.getElementById("other_address_id");
+            const paymentForm = document.getElementById("payment-form");
+    
+            // Validate address before placing order
+            function validateAddress(event) {
+                if (!addressField.value.trim()) {
+                    event.preventDefault();
+                    alert("Please enter/select an address before placing the order.");
+                }
+            }
+    
+            // Show/hide buttons based on payment selection
+            paymentOptions.forEach(option => {
+                option.addEventListener("change", function () {
+                    if (this.value === "cod") {
+                        codButton.style.display = "block";
+                        razorpayButton.style.display = "none";
+                    } else {
+                        codButton.style.display = "none";
+                        razorpayButton.style.display = "block";
+                    }
+                });
+            });
+    
+            // Validate address before submitting the form
+            codButton.addEventListener("click", validateAddress);
+        });
+    </script>
+    
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        function updateAddress(addressId) {
+            console.log("Selected Address ID:", addressId);  // Debugging
+            document.getElementById("other_address_id").value = addressId;
+        }
+        document.getElementById('rzp-button1').onclick = function (e) {
+            e.preventDefault(); // Prevent immediate form submission
+    
+            var addressId = document.getElementById("other_address_id").value;
+            if (!addressId) {
+                alert("Please select an address before proceeding to payment.");
+                return;
+            }
+    
+            var paymentForm = document.getElementById("payment-form");
+    
+            // Ensure the address is included in the form
+            var hiddenField = document.createElement("input");
+            hiddenField.type = "hidden";
+            hiddenField.name = "selected_address";
+            hiddenField.value = addressId;
+            paymentForm.appendChild(hiddenField);
+    
+            var options = {
+                "key": "rzp_test_bilBagOBVTi4lE",
+                "amount": {{ response.amount }},  // Amount in paisa (50000 = ₹500)
+                "currency": "INR",
+                "name": "Your Company Name",
+                "description": "Payment for Order",
+                "handler": function (response) {
+                    alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+    
+                    // Submit the form after successful payment
+                    paymentForm.submit();
+                },
+                "prefill": {
+                    "name": "John Doe",
+                    "email": "john@example.com",
+                    "contact": "9999999999"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+    
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        };
+    </script>
+    
+    
+    
+    {% endblock %}

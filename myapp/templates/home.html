@@ -1,0 +1,239 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+
+
+    <!-- Font-awesome CSS -->
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS (with Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="shop">
+        <p>Shop With Mangalam-The Traditional Wear</p>
+    </div>
+
+    <div class="navbar">
+        <div class="logo">
+            <h1>MANGALAM</h1>
+            <h2>The Traditional Outfit</h2>
+        </div>
+        <div class="search">
+            <input type="search" placeholder="Search Type Of Outfit"><button><i
+                class="fa-solid fa-magnifying-glass"></i></button>        </div>
+        <div class="profile">
+            <li><a href="{% url 'login' %}"><i class="fa-solid fa-user"></i></a></li>         
+            <li style="border: 2px solid black !important;"><a  href="{% url 'wishlist'  %}" role="button" ><i class="fa-regular  fa-heart heart"></i></a>
+                <span class="badge"  style="color: black; padding: 5px; font-size: 20px;">{{wish_count}}</span>
+            </li>
+            <li style="border: 2px solid black !important;" ><a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+                <span class="badge"  style="color: black; padding: 5px; font-size: 20px;">{{cart_count}}</span> 
+            </li>
+            <li><a href="{% url 'contact' %}"><i class="fa-solid fa-phone"></a></i>
+            </li>
+           
+        </div>
+        
+       
+    </div>
+  
+
+    <!-- <div class="list">
+        <ul>
+            <li><a href="{% url 'home' %}" style="text-decoration: none; color: black;">Home</a></li>
+            <li>
+                <a href="#" style="text-decoration: none; color: black;">Category</a>
+                <ul>
+                    {% for i in mc %}
+                    <li>                    
+                        <a href="#" style="text-decoration: none; color: black;">{{ i.name }}</a>
+                        <ul>
+                            {% for n in i.sub_category_set.all %}
+                            <li>
+                                <a href="{% url 'home' %}?mc2={{ n.id }}" style="text-decoration: none; color: black;">
+                                    {{ n.name }}
+                                </a>
+                                <ul>
+                                    {% for m in n.secondsub_category.all %}
+                                    <li>
+                                        <a href="{% url 'home' %}?mc2={{ n.id }}&sc2={{ m.id }}" style="text-decoration: none; color: black;">
+                                            {{ m.name }}
+                                        </a>
+                                       
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li>Shop</li>
+            <li><a href="{% url 'card' %}" style="text-decoration: none; color: black;">Shop Details</a></li>
+            <li><a href="{% url 'logout' %}" style="text-decoration: none; color: black;">Logout</a></li>
+        </ul>
+        
+
+
+    </div> -->
+
+    <div class="list">
+        <ul>
+            <li><a href="{% url 'home' %}" style="text-decoration: none; color: black;">Home</a></li>
+            <li><a href="javascript:void(0)" style="text-decoration: none; color: black;">Category</a>
+                <ul>
+                    {% for i in mc %}
+                    <li><a href="javascript:void(0)" style="text-decoration: none; color: black;">{{ i.name }}</a>
+                        {% if i.sub_category_set.all %}
+                        <ul>
+                            {% for n in i.sub_category_set.all %}
+                            <li><a href="{% url 'home' %}?mc2={{ n.id }}" style="text-decoration: none; color: black;">
+                                {{ n.name }}
+                            </a>
+                                <ul>
+                                    {% for m in nc %}
+                                    {% if n == m.secondsub_category %}
+                                    <li>
+                                        <a href="{% url 'home' %}?mc2={{ n.id }}&sc2={{ m.id }}" style="text-decoration: none; color: black;">
+                                            {{ m.name }}
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li><a href="{% url 'checkout'  %}" style="text-decoration: none; color: black;">Checkout</a></li>
+            <li><a href="{% url 'logout' %}" style="text-decoration: none; color: black;">Logout</a></li>
+        </ul>
+    </div>
+    
+    
+    
+    <div class="list list1">
+        <ul>
+            <li>Color
+                
+                <ul>
+                    {% for i in color_id %}
+                    <a href="{% url 'home' %}?color_filter2={{i.id}}" style="text-decoration: none; color: black;"><li>{{i.name}}</li></a>
+                    {% endfor %}
+                </ul>
+                
+            </li>
+            <li>Fabric
+                <ul>
+                    {% for i in fabric_id %}
+                    <a href="{% url 'home' %}?fabric_filter2={{i.id}}" style="text-decoration: none; color: black;"><li>{{i.name}}</li></a>
+                    {% endfor %}                     
+                </ul>
+            </li>
+            <li>Size
+                <ul>
+                    {% for i in size_id %}
+                    <a href="{% url 'home' %}?size_filter2={{i.id}}" style="text-decoration: none; color: black;"><li>{{i.name}}</li></a>
+                    {% endfor %} 
+                </ul>
+            </li>
+            <li>Price
+                <ul>
+                    {% for i in price_id %}
+                    <a href="{% url 'home' %}?price_filter2={{i.id}}" style="text-decoration: none; color: black;"><li>{{i.name}}</li></a>
+                    {% endfor %} 
+                </ul>
+            </li>
+            
+        </ul>
+    </div> 
+
+
+    {% block content %}
+
+    <div class="card1">
+        {%  for i in pid %}
+        <div class="one-card">
+            {% if i.id in wish %}
+           <a href="{% url 'add_wishlist' i.id %}"> <i class="fa-solid fa-heart icon" style="color: red;"></i></a>
+           {% else %}
+           <a href="{% url 'add_wishlist' i.id %}"> <i class="fa-solid fa-heart icon" style="color:#c77d75;" ></i></a>
+           {% endif %}
+            <div class="img1">
+                <img src="{{i.image.url}}" alt="">
+            </div>
+            <div class="description">
+                <p> <a href="{% url 'imgdetail' i.id %}">{{i.name}}</a></p>            
+       
+                <h3>{{i.price}}  <s>{{i.del_price}}</s> </h3>
+              
+                <button><a href="{% url 'add_cart' i.id %}" style="color: white; text-decoration: none;"> Add to cart</a></button>
+            </div>
+      
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endblock %}
+
+    <div class="footer">
+        <div class="offer">
+            <h2>Stay in the Know</h2>
+            <h3>Be the first one to receive new releases, special offers, and more</h3>
+            <input type="text" placeholder="Sign up to get 10% off first Purchase"><button>SIGN UP</button>
+        </div>
+
+        <div class="flist">
+            <ul>
+                <li class="title">HELP</li>
+                <li><a href="{% url 'contact' %}" style="text-decoration: none; color: black;">Contact Us</a></li>
+                <li><a href="{% url 'shippinh' %}" style="text-decoration: none; color: black;">shipping Information</a></li>
+                <li><a href="{% url 'return' %}" style="text-decoration: none; color: black;">Return Policy</a></li>
+                <li><a href="{% url 'faq' %}" style="text-decoration: none; color: black;">FAQ</a></li>
+            </ul>
+
+            <ul>
+                <li class="title">ABOUT</li>
+                <li><a href="{% url 'about' %}" style="text-decoration: none; color: black;">About us</a></li>
+                <li>Revies</li>
+            </ul>
+
+            <ul>
+                <li class="title">SHOP</li>
+                <a href="{% url 'home' %}" style="text-decoration: none; color: black;"><li>Women</li></a>
+                <a href="{% url 'home' %}" style="text-decoration: none; color: black;"><li>Saree</li></a>
+                <a href="{% url 'home' %}" style="text-decoration: none; color: black;"><li>Men</li></a>
+                <a href="{% url 'home' %}" style="text-decoration: none; color: black;"><li>Shervani</li></a>
+            </ul>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

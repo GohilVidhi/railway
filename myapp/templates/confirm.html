@@ -1,0 +1,21 @@
+{% extends "home.html" %}
+{% load static %}
+{% block content %}
+
+
+<div class="reset">
+    <h1>Confirm Password</h1>
+    <h4>{{msg}}</h4>
+    <form action="{% url 'confirm_password' %}" method="post">
+        {% csrf_token %}
+
+    <input type="email" placeholder="Email" name="email" value="{{email}}"><br>
+    <input type="text" placeholder="otp" name="otp"><br>
+    <input type="password" placeholder="New password" name="new_password"><br><h5 style="color: red; font-size: 12px;">Only characters allowed</h5>
+    <input type="password" placeholder="Confirm password" name="confirm_password"><br>
+    <input type="submit"  value="submit">
+    <h4><a href="{% url 'login' %}" style="color: goldenrod; text-decoration: none;">Cancel</a></h4>
+</form>
+</div>
+
+{% endblock %}

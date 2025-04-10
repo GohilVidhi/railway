@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Orders</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        tr:hover {
+            background: #e0e0e0;
+        }
+
+        /* Link Button */
+        .view-link {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .view-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        /* No Orders Message */
+        .no-orders {
+            text-align: center;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>All Orders</h2>
+
+    {% if orders %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User</th>
+                    <th>Subtotal</th>
+                    <th>Shipping</th>
+                    <th>Coupon</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Refund Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.order_id }}</td>
+                        <td>{{ order.user_data.name }}</td>
+                        <td>₹{{ order.sub_total }}</td>
+                        <td>₹{{ order.shipping }}</td>
+                        <td>₹{{ order.coupon }}</td>
+                        <td><strong>₹{{ order.total }}</strong></td>
+                        <td>
+                            <span style=" 
+                                padding: 5px 10px;
+                                border-radius: 5px;
+                                font-weight: bold;
+                                color: white;
+                                background:
+                                    {% if order.status == 'pending' %}orange
+                                    {% elif order.status == 'accepted' %}blue
+                                    {% elif order.status == 'out_for_delivery' %}purple
+                                    {% elif order.status == 'delivered' %}green
+                                    {% elif order.status == 'cancelled' %}red
+                                    {% else %}gray{% endif %}
+                                ">
+                                {{ order.get_status_display }}
+                            </span>
+                        </td>
+                        <td>
+                            <form method="post" action="{% url 'toggle_refund' order.order_id %}">
+                                {% csrf_token %}
+                                <button type="submit" 
+                                    style="background: {% if order.is_refunded %}green{% else %}red{% endif %};
+                                        color: white;
+                                        border: none;
+                                        padding: 5px 10px;
+                                        cursor: {% if order.is_refunded %}not-allowed{% else %}pointer{% endif %};
+                                        border-radius: 5px;" 
+                                    {% if order.is_refunded %}disabled{% endif %}>
+                                {% if order.is_refunded %}ON{% else %}OFF{% endif %}
+                            </button>
+                            </form>
+                        </td>
+                        <td>
+                            <a href="{% url 'single_order' order.order_id %}" class="view-link">View Details →</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-orders">No orders found.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

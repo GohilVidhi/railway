@@ -1,0 +1,805 @@
+*{
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
+   
+}
+p{
+    margin-bottom: 0 !important;
+}
+body{
+    background-color: white;
+}
+.shop p{
+    text-align: center;
+    background-color:ghostwhite;
+    
+    font-size: 22px;
+}
+.navbar{
+    background-color: #c77d75 !important;
+    
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    justify-content: space-between;
+    /* height: 100px; */
+    /* align-items: center; */
+}
+.logo{
+    /* background-color: aqua; */
+    /* margin-left: 30px; */
+    height: 70px;
+    color: black !important;
+    margin-left: 25px;
+    margin-top: 5px;
+}
+.logo h1{
+    position: relative;
+    font-size: 30px;
+    /* background-color: aquamarine;   */
+}
+.logo h2{
+    position: absolute;
+    margin-top: 0px !important;
+    /* background-color: blue; */
+    left: 80px;
+    font-size: 23px;
+}
+ .search input{
+    /* border-radius: 15px; */
+    border:none;
+    text-align: center;
+    /* padding-left: 40px; */
+    width: 390px;
+    height: 40px;
+    margin-top:10px !important;
+    font-size: 20px;
+    /* background-color: aqua; */
+
+ }
+ .search button{
+    /* border-radius: 10px; */
+    border:none;
+    color: gray;
+    background-color:white;
+    /* padding-left: 40px; */
+    width: 20px;
+    height: 40px;
+    margin-top: 10px;
+    font-size: 20px;
+ }
+ .profile {
+    list-style: none;
+   display: flex;
+   font-size: 20px;
+   gap: 15px;
+   /* margin-top: 30px; */
+   margin-right: 25px;
+   color: black !important;
+ }
+ .heart{
+    font-size: 20px;
+    /* gap: 1px !important; */
+ }
+ .profile a{
+    color: black !important;
+ }
+
+
+
+.cd-img{
+    height: 100px;
+    width: 100px;
+ }
+ .cd-img img{
+    height: 100%;
+    width: 100%;
+ }
+.wish{
+    display: flex;
+    gap: 10px;
+    margin-top: 50px;
+}
+.cd-desc p{
+    width: 250px;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+.cd-desc h4{
+    gap: 0px;
+    margin-top: 0px;
+}
+.list1{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+   margin-top: 10px;
+    font-size: 20px;
+    background-color: white !important;
+}
+.list ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 20px;
+    background-color: ghostwhite;
+}
+
+.list>ul>li {
+    position: relative;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-bottom: -1px;
+    z-index: 999;
+}
+
+.list ul li {
+    position: relative;
+}
+
+.list ul li ul {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    padding: 10px 0;
+    z-index: 1000;
+    min-width: max-content;
+    background-color: ghostwhite;
+
+    border: 1px solid #ddd;
+}
+
+.list ul li ul li {
+    padding: 8px 12px;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    z-index: 1001;
+}
+
+.list ul li ul li ul {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    min-width: max-content;
+    background-color: ghostwhite;
+    border: 1px solid #ddd;
+    z-index: 1002;
+}
+
+/* Ensure submenus remain visible when hovered */
+.list ul li:hover > ul {
+    display: block;
+    z-index: 1003;
+}
+
+.list ul li ul li:hover > ul {
+    display: block;
+    z-index: 1004;
+}
+
+.list ul li ul li:hover {
+    background-color: #ddd;
+    z-index: 1005;
+}
+
+/* Add this rule to ensure the deepest submenu is shown when hovering over its parent */
+.list ul li ul li:hover > ul {
+    display: block;
+    z-index: 1006;
+}
+/* login page */
+
+.canmargin{
+    margin-top: 200px;
+    margin-right: 550px;
+    height: 450px;
+    /* background-color: #f0e4d5; */
+    /* width: 900px; */
+    border-radius: 30px;
+}
+
+.login h1{
+    height: 100px;
+    text-align: center;
+    padding-top: 15px;
+    font-size: 50px;
+    color: #D19C97 !important;
+}
+.login{
+    /* background-color: navy; */
+    text-align: center;
+    /* padding-top: 25px; */
+    /* margin-top: 50px; */
+    /* height: 500px; */
+}
+.login input{
+    font-size: 20px;
+    text-align: center;
+    width: 300px;
+    height: 40px;
+    /* margin-top: 5; */
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.login p{
+    margin-top: 5px;
+    /* text-decoration: none; */
+}
+.login p a{
+    color: #D19C97;
+    font-size: 15px;
+    text-decoration: none;
+    /* margin-top: 50px; */
+    /* padding-top: 50px; */
+    /* background-color: blanchedalmond; */
+}
+.login button{
+    font-size: 20px;
+    margin-top: 20px;
+    height: 40px;
+    width: 300px;
+    border-radius: 10px;
+    /* color: black; */
+}
+.login button a{
+    color: black;
+    text-decoration: none;
+}
+
+
+
+/* registration */
+
+.reg h1{
+    /* height: 50px; */
+    text-align: center;
+    padding-top: 15px;
+    font-size: 30px;
+    color: ghostwhite;
+}
+.reg{
+    /* background-color: none; */
+    text-align: center;
+    padding-top: 25px;
+    /* height: 700px; */
+}
+
+.reg input{
+    font-size: 20px;
+    text-align: center;
+    width: 300px;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.reg p {
+    color: ghostwhite;
+    font-size: 15px;
+    /* margin-top: 5px; */
+    padding-top: 10px;
+    /* background-color: blanchedalmond; */
+}
+.reg button{
+    font-size: 20px;
+    margin-top: 30px;
+    height: 40px;
+    width: 300px;
+    border-radius: 10px;
+    color: black;
+}
+
+/* .card{
+    height: 500px;
+    width: 500px;
+}
+.card img{
+    height: 100%;
+    width: 100%;
+} */
+
+/*Contact Us*/
+
+.contact{
+    background-color: white;
+    /* background-color:   navajowhite; */
+    text-align: center;
+}
+.contact h1{
+    height: 100px;
+    text-align: center;
+    padding-top: 30px;
+    font-size: 50px;
+    color: #D19C97;
+}
+.contact select{
+    font-size: 20px;
+    text-align: center;
+    width: 400px;
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.inp input{
+    font-size: 20px;
+    text-align: center;
+    width: 400px;
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.inp button{
+    font-size: 20px;
+    margin-top: 30px;
+    height: 40px;
+    width: 400px;
+    border-radius: 10px;
+    /* color: black; */
+}
+
+/*about Us*/
+
+.images{
+    padding-bottom: 50px;
+    background-color: navy;
+}
+
+.ig{
+    height: 500px;
+    width: 100%;
+}
+.ig img{
+    height: 100%;
+    width: 100%;
+}
+.image{
+    height: 500px;
+    width: 100%;
+    background-color: white;
+    /* margin-top: 50px; */
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+    color: ghostwhite;
+}
+.im1{
+    height: 500px;
+    width: 500px;
+}
+.im1 img{
+    height: 100%;
+    width: 100%;
+}
+.desc{
+    /* background-color: rebeccapurple; */
+    height: 150px;
+    margin-top: 165px;
+    color: black;
+    /* font-size: 15px; */
+}
+.desc pre{
+    font-size: 20px;
+}
+.reset{
+    /* background-color: navy; */
+    text-align: center;
+}
+.reset h1{
+    /* background-color: navy; */
+    color: #D19C97;
+    /* padding-top: 25px; */
+    text-align: center;
+    font-size: 30px;
+}
+.reset h4{
+    /* background-color: navy; */
+    color: #D19C97;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 20px;
+}
+.reset input{
+    font-size: 20px;
+    text-align: center;
+    width: 300px;
+    height: 40px;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+.reset button{
+    font-size: 20px;
+    margin-top: 30px;
+    height: 40px;
+    width: 300px;
+    border-radius: 10px;
+}
+
+/* footer */
+
+.footer{
+    background-color: #c77d75;
+    display: grid;
+    grid-template-columns: auto auto ;
+    margin-bottom: 50px;
+    height: 300px;
+}
+.offer h2{
+    font-size: 22px;
+    /* text-align: center; */
+    margin-top: 80px;
+    margin-left: 250px;
+    color: navy;
+    /* background-color: aliceblue; */
+}
+.offer h3{
+    font-size: 17px;
+    margin-left: 120px;
+    color: navy;
+    /* text-align: center; */
+}
+.offer input{
+    height: 50px;
+    width: 300px;
+    margin-top: 30px;
+    margin-left: 140px;
+}
+.offer button{
+    height: 50px;
+    width: 100px;
+    color: navy;
+    background-color: ghostwhite;
+    /* margin-top: 120px; */
+    /* margin-left: 100px; */
+}
+.flist{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.flist ul{
+    list-style: none;
+    font-size: 25px;
+    /* line-height: 13px; */
+    margin-top: 80px;
+}
+.title{
+    color: navy;
+
+}
+
+/* Shipping */
+
+.ship{
+    background-color: white ;
+}
+.ship h1{
+    color: #c77d75;
+    padding-top: 50px;
+    text-align: center;
+    /* margin-left: 100px; */
+}
+.ship h3{
+    color: #D19C97;
+    margin-top: 20px;
+    margin-left: 400px;
+    font-size: 20px;
+}
+.ship p{
+    color: black;
+    width: 800px;
+    margin-left: 400px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.menu{
+    background-color: navy;
+    color: goldenrod;
+    text-align: center;
+    height: 250px;
+    align-items: center;
+    
+ }
+ .salwar {
+    font-size: 30px;
+    padding: 20px;
+    /* align-self: center; */
+ }
+ .kurti ul{
+    gap:20px;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    list-style: none;
+    font-size: 30px;
+    /* padding: 20px; */
+    /* align-items: center; */
+    /* border: 2px solid goldenrod; */
+ }
+ .kurti ul li{
+    border:2px solid ghostwhite;
+    padding: 6px;
+ }
+.cs{
+    height: 50px;
+    margin-top: 15px;
+    font-size: 22px;
+    width: 100%;
+    /* margin-left: 50px */
+}
+.card1{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: center;
+    gap: 15px;
+}
+.one-card{
+    height: 490px;
+    width: 350px;
+    /* border: 2px solid black; */
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
+}
+.img1{
+    height: 350px;
+    width: 350px;
+}
+.img1 img{
+    height: 100%;
+    width: 100%;
+}
+.description p{
+    font-size: 20px;
+    margin-top: 10px;
+    height: 50px;
+    
+}
+p a{
+    text-decoration: none;
+    color:black;
+}
+.description h3{
+    font-size: 18px;
+    margin-top: 10px;
+    /* height: 50px; */
+   }
+.description button{
+    margin-top: 10px;
+    font-size: 20px;
+    border: none;
+    color: white;
+    width: 100%;
+    background-color: rgb(18, 18, 18);
+    
+}
+.icon{
+    position: absolute;
+    right: 20px;
+    top:10px;
+    font-size: 20px;
+    color: red;
+}
+
+/* payment*/
+
+.pay{
+    display: grid;
+    grid-template-columns: auto auto ;
+}
+.info{
+    /* background-color: aquamarine; */
+    width: 100%;
+    height: 1000px;
+}
+.place{
+    /* background-color: aqua; */
+    width: 100%;
+    height: 1000px;
+}
+.info h1{
+    margin-top: 30px;
+    text-align: center;
+}
+.information{
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 50px;
+    justify-content: space-evenly;
+}
+.inf label{
+    font-size: 20px;
+}
+.inf input{
+    height: 40px;
+    width: 350px;
+    font-size: 15px;
+    margin-top: 10px;
+}
+.check{
+    margin-top: 30px;
+    margin-left: 100px;
+    /* font-size: 50px; */
+}
+.total{
+    height: 362px;
+    /* background-color: aliceblue; */
+    width: 70%;
+    margin-top: 140px;
+    margin-left: 60px;
+    border: 2px solid black;
+}
+.total h2{
+    background-color: lightcoral;
+    text-align: center;
+    font-size: 30px;
+    border-bottom: 2px solid black ;
+}
+.pro{
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 20px;
+    justify-content: space-between;
+    font-size: 20px;
+    gap: 10px;
+    padding-bottom: 20px;
+    /* margin-bottom: 20px; */
+    border-bottom: 2px solid black ;
+}
+.mode{
+    height: 191px;
+    /* background-color: aliceblue; */
+    width: 70%;
+    margin-top: 40px;
+    margin-left: 60px;
+    border: 2px solid black;
+}
+.mode h2{
+    text-align: center;
+    font-size: 30px;
+    background-color: lightcoral;
+    border-bottom: 2px solid black ;
+}
+.mode input{
+    margin-top: 20px;
+}
+.mode button{
+    height: 50px;
+    width: 100%;
+    margin-top: 30px;
+    font-size: 25px;
+    background-color: lightcoral;
+}
+
+/* cart */
+
+.cart{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    height: 500px;
+
+}
+.cart-info{
+    /* background-color: aqua; */
+    width: 100%;
+    /* height: 1000px; */
+}
+.cart-img{
+    height: 100px;
+    width: 100px;
+    /* display: flex; */
+    border: none;
+}
+.cart-img img{
+    height: 100%;
+    width: 100%;
+    margin-top: 10px;
+    /* border: none; */
+}
+.cart-img p{
+    margin-top: 10px;
+}
+.cart-info table td{
+    width: 150px;
+    text-align: center;
+}
+.cart-info table{
+    margin-top: 100px;
+    margin-left: 100px;
+    /* height: 500px; */
+}
+.cart-summ input{
+    height: 50px;
+    width: 300px;
+    font-size: 20px;    
+}
+.cart-summ button{
+    height: 50px;
+    font-size: 20px;
+}
+.cart-summ{
+    /* text-align: center; */
+    /* padding-top: 100px; */
+}
+.qty{
+    display: flex;
+}
+.total-1{
+    display: grid;
+    grid-template-columns: auto auto;
+    /* margin-left: 120px; */
+    justify-content: space-between;
+    font-size: 20px;
+    gap: 20px;
+    padding-bottom: 20px;
+    /* margin-bottom: 20px; */
+    border-bottom: 2px solid black ;
+    border: 2px solid black;
+    width: 300px;   
+}
+
+
+.tt{
+    height: 270px;
+    width: 350px;
+    margin-top: 50px;
+    margin-left: 0px;
+}
+
+/* one card */
+
+.shop-card{
+    display: grid;
+    grid-template-columns: auto auto ;
+    /* background-color: #ddd; */
+    /* height: 800px; */
+}
+
+.card-img{
+    margin-top: 100px;
+    height: 500px;
+    width: 400px;
+    margin-left: 200px;
+}
+.card-img img{
+    height: 100%;
+    width: 100%;
+}
+.card-desc{
+    margin-top: 150px;
+    margin-left: 0px;
+    /* background-color: aqua; */
+    /* height: 500px; */
+}
+.card-desc h4{
+    margin-top: 20px;
+    font-size: 20px;
+}
+.card-desc button{
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+}
+
+
+.logincolor{
+    color: beige !important ;
+}
+
+
+.navbar{
+    color: #D19C97 !important;
+}
+.bc{
+    background-color: #D19C97 !important;
+}
+.bc1{
+    background-color: aliceblue !important;
+}
+

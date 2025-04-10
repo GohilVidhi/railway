@@ -1,0 +1,102 @@
+
+{% extends "home.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="pay">
+        <div class="info">
+            <h1>Billing Information</h1>
+
+            <div class="information">
+                <div class="inf">
+                    <label for="">First Name</label><br>
+                    <input type="text" placeholder="First Name">
+                </div>
+                <div class="inf">
+                    <label for="">Last Name</label><br>
+                    <input type="text" placeholder="Last Name">
+                </div>
+            </div>
+
+            <div class="information">
+                <div class="inf">
+                    <label for="">E-mail</label><br>
+                    <input type="email" placeholder="E-mail">
+                </div>
+                <div class="inf">
+                    <label for="">Contact No</label><br>
+                    <input type="text" placeholder="Contact No">
+                </div>
+            </div>
+
+            <div class="information">
+                <div class="inf">
+                    <label for="">Address Line 1</label><br>
+                    <input type="text" placeholder="Address Line 1">
+                </div>
+                <div class="inf">
+                    <label for="">Address Line 2</label><br>
+                    <input type="text" placeholder="Address Line 2">
+                </div>
+            </div>
+
+            <div class="information">
+                <div class="inf">
+                    <label for="">Country</label><br>
+                    <input type="text" value="India">
+                </div>
+                <div class="inf">
+                    <label for="">State</label><br>
+                    <input type="text" value="Gujarat">
+                </div>
+            </div>
+
+            <div class="information">
+                <div class="inf">
+                    <label for="">City</label><br>
+                    <input type="text" value="Ahmedabad">
+                </div>
+                <div class="inf">
+                    <label for="">Pincode</label><br>
+                    <input type="text" placeholder="Pincode">
+                </div>
+            </div>
+
+            <input type="checkbox" class="check">Create an Account <br>
+
+        </div>
+        <div class="place">
+            <div class="total">
+                <h2>Order Total</h2>
+                <h3 style="font-size: 22px; text-align: center; margin-top: 10px;">Products</h3>
+
+                <div class="pro">
+                    <p>casual Gown</p>
+                    <p>RS.15,000</p>
+                    <p>mermaid Gown</p>
+                    <p>RS.19,000</p>
+                    <p>highlow Gown</p>
+                    <p>RS.25,000</p>
+                </div>
+                <div class="pro">
+                    <p>subtotal</p>
+                    <p>RS.15,000</p>
+                    <p>shipping</p>
+                    <p>RS.20</p>
+                </div>
+                <div class="pro">
+                    <p>Total</p>
+                    <p>RS.20,000</p>
+                </div>
+            </div>
+
+            <div class="mode">
+                <h2>Payment</h2>
+                <input type="radio">COD <br>
+                <input type="radio">UPI <br>
+                <button>Place Order</button> 
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

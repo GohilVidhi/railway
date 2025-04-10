@@ -1,0 +1,30 @@
+{% extends "home.html" %}
+{% load static %}
+{% block content %}
+
+
+    <div class="shop-card">
+   
+        <div class="card-img">
+            <img src="{{pid.image.url}}" alt="" style="height: 400px; width: 400px;">
+        </div>
+        <div class="card-desc">
+            <h2>{{pid.name}}</h2>
+            <h4>{{pid.price}}</h4>
+            <br>
+            <h4>Select Your Size:</h4>
+            <br>
+            <button>S</button>
+            <button>M</button>
+            <button>Xl</button>
+            <button>XXl</button>
+            <button>3Xl</button>
+            <br>
+            <br>
+            <button style="width: 518px; font-size: 20px;"><a href="{% url 'checkout' %}" style="color: black; text-decoration: none;">Buy Now</a></button><br><br>
+            <h5 style="margin-left: 220px; font-size: 20px; color: black;"><a href="{% url 'wishlist' %}" style="color: black; text-decoration: none;">Add To Wishlist</a></h5>
+        </div>
+    
+    </div>
+
+    {% endblock %}

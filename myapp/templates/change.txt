@@ -1,0 +1,6 @@
+In cart page:
+    if one user apply discount then discount is printed all the time without giving it
+    and the coupons code is not shown in cart page
+
+in shipping charges:
+    shipping charges are different for all area

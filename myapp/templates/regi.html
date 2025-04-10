@@ -1,0 +1,26 @@
+{% extends "home.html" %}
+{% load static %}
+{% block content %}
+
+
+<div class="regestration-main">
+    <div class="reg">
+        <h1  style="color: #c77d75;">Create Account</h1>
+        <h3>{{msg}}</h3>
+        <form action="{% url 'reg' %}" method="post">
+            {% csrf_token  %}
+
+            <input type="text" name="name" placeholder="First Name" pattern="[A-Za-z]+" title="Only alphabetic characters are allowed" required><br>
+
+        <input type="email" name="email" placeholder="E-mail" required><br>
+        <input type="password" name="password" placeholder="password" minlength="8" maxlength="20" required>
+<br>
+        <input type="password" name="conp" placeholder="confirm password"><br>
+        <p style="color: #c77d75;">By Terms & Condition</p>
+
+        <button type="submit" style="background-color: #c77d75;">Create Account</button>
+    </form>
+    </div>
+</div>
+
+{% endblock%}
