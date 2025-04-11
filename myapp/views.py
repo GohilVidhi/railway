@@ -194,7 +194,7 @@ def editaddress(request):
         return redirect("checkout")
 
     
-import razorpay    
+# import razorpay    
 def checkout(request):
     if 'email' in request.session:
         uid=User.objects.get(email=request.session['email'])
@@ -248,18 +248,18 @@ def checkout(request):
             address.objects.create(firstname=fname,lastname=lname,resident_address=recident_address,state=state,pincode=pincode,phone=phone,email=uid,city=city)
         
         if total_price == 0:    
-            amount = 1*100 #100 here means 1 dollar,1 rupree if currency INR
-            client = razorpay.Client(auth=('rzp_test_bilBagOBVTi4lE','77yKq3N9Wul97JVQcjtIVB5z'))
-            response = client.order.create({'amount':amount,'currency':'INR','payment_capture':1})
-            print(response,"**************")
-            contaxt={"response":response,"mc":mc,"cart_count":cart_count,"wish_count":wish_count,"ch":ch,"uid":uid,"existing_address":old_address,"ship":ship,"cty":ctya,"subtotal":subtotal,"dis":dis,"disamount":disamount,"total_price":total_price,"cart_sum":cart_sum}
+            # amount = 1*100 #100 here means 1 dollar,1 rupree if currency INR
+            # client = razorpay.Client(auth=('rzp_test_bilBagOBVTi4lE','77yKq3N9Wul97JVQcjtIVB5z'))
+            # response = client.order.create({'amount':amount,'currency':'INR','payment_capture':1})
+            # print(response,"**************")
+            contaxt={"mc":mc,"cart_count":cart_count,"wish_count":wish_count,"ch":ch,"uid":uid,"existing_address":old_address,"ship":ship,"cty":ctya,"subtotal":subtotal,"dis":dis,"disamount":disamount,"total_price":total_price,"cart_sum":cart_sum}
             return render(request,"checkout.html",contaxt)
         else:
-            amount = total_price*100 #100 here means 1 dollar,1 rupree if currency INR
-            client = razorpay.Client(auth=('rzp_test_bilBagOBVTi4lE','77yKq3N9Wul97JVQcjtIVB5z'))
-            response = client.order.create({'amount':amount,'currency':'INR','payment_capture':1})
-            print(response,"**************")
-            contaxt={"response":response,"mc":mc,"cart_count":cart_count,"wish_count":wish_count,"ch":ch,"uid":uid,"existing_address":old_address,"ship":ship,"cty":ctya,"subtotal":subtotal,"dis":dis,"disamount":disamount,"total_price":total_price,"cart_sum":cart_sum}
+            # amount = total_price*100 #100 here means 1 dollar,1 rupree if currency INR
+            # client = razorpay.Client(auth=('rzp_test_bilBagOBVTi4lE','77yKq3N9Wul97JVQcjtIVB5z'))
+            # response = client.order.create({'amount':amount,'currency':'INR','payment_capture':1})
+            # print(response,"**************")
+            contaxt={"mc":mc,"cart_count":cart_count,"wish_count":wish_count,"ch":ch,"uid":uid,"existing_address":old_address,"ship":ship,"cty":ctya,"subtotal":subtotal,"dis":dis,"disamount":disamount,"total_price":total_price,"cart_sum":cart_sum}
             return render(request,"checkout.html",contaxt)
         
     else:
