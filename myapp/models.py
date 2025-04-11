@@ -150,7 +150,7 @@ class address(models.Model):
 class order(models.Model):
     user_data=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
     address_data=models.ForeignKey(address,on_delete=models.CASCADE,blank=True,null=True)
-    cart_data=models.ManyToManyField(Add_to_cart,blank=True,null=True)
+    cart_data=models.ManyToManyField(Add_to_cart)
     order_id=models.CharField(max_length=100)
     sub_total=models.IntegerField()
     shipping=models.CharField(max_length=100)
