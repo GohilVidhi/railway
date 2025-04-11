@@ -9,21 +9,21 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-import django
-from django.contrib.auth import get_user_model
-from django.db.utils import OperationalError
+# import django
+# from django.contrib.auth import get_user_model
+# from django.db.utils import OperationalError
  
-django.setup()
-User = get_user_model()
+# django.setup()
+# User = get_user_model()
  
-try:
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser("admin", "admin@example.com", "admin123")
-        print("✅ Superuser created!")
-    else:
-        print("ℹ️ Superuser already exists.")
-except OperationalError:
-    print("⛔ Database not ready yet.")
+# try:
+#     if not User.objects.filter(username="admin").exists():
+#         User.objects.create_superuser("admin", "admin@example.com", "admin123")
+#         print("✅ Superuser created!")
+#     else:
+#         print("ℹ️ Superuser already exists.")
+# except OperationalError:
+#     print("⛔ Database not ready yet.")
 
 
 
