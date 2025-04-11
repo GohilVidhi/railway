@@ -1,9 +1,20 @@
 {
-    "$schema": "https://railway.app/railway.schema.json",
-    "build": {
-        "builder": "RAILPACK"
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "builder": "RAILPACK",
+    "buildCommand": "pip install mysqlclient"
+  },
+  "deploy": {
+    "runtime": "V2",
+    "numReplicas": 1,
+    "startCommand": "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn mysite.wsgi",
+    "sleepApplication": false,
+    "multiRegionConfig": {
+      "europe-west4-drams3a": {
+        "numReplicas": 1
+      }
     },
-    "deploy": {
-        "startCommand": "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn mysite.wsgi"
-    }
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
 }
